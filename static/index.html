@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>tools.grejo.in — Developer Tools</title>
+  <meta name="description" content="Free, open-source tools for developers — JSON formatting, URL parsing, encoding, and ciphers.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- ===================== HEADER ===================== -->
+  <header class="header">
+    <div class="header-left">
+      <button class="btn-icon menu-toggle" id="menu-toggle" aria-label="Toggle menu">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <a class="logo" href="/">
+        <span class="logo-dot"></span>
+        tools.grejo.in
+      </a>
+    </div>
+    <div class="header-right">
+      <button class="btn-icon theme-toggle" id="theme-toggle" aria-label="Toggle theme" title="Toggle theme">
+        <span class="theme-icon-sun">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </span>
+        <span class="theme-icon-moon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Backdrop dims content when mobile sidebar is open -->
+  <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+
+  <!-- ===================== BODY ===================== -->
+  <div class="body">
+
+    <!-- ---- Sidebar ---- -->
+    <nav class="sidebar" id="sidebar">
+      <div class="nav-group">
+        <div class="nav-group-label">JSON</div>
+        <a class="nav-item" href="#json-prettify">Prettify</a>
+        <a class="nav-item" href="#json-compress">Compress</a>
+        <a class="nav-item" href="#json-validate">Validate</a>
+        <a class="nav-item" href="#json-compare">Compare</a>
+        <a class="nav-item" href="#json-sort-keys">Sort Keys</a>
+      </div>
+      <div class="nav-group">
+        <div class="nav-group-label">URL</div>
+        <a class="nav-item" href="#url-parse">Parse</a>
+        <a class="nav-item" href="#url-encode">Encode</a>
+        <a class="nav-item" href="#url-decode">Decode</a>
+      </div>
+      <div class="nav-group">
+        <div class="nav-group-label">Cipher</div>
+        <a class="nav-item" href="#cipher-caesar">Caesar</a>
+      </div>
+    </nav>
+
+    <!-- ---- Main ---- -->
+    <main class="main" id="main">
+
+      <!-- ========== JSON: Prettify ========== -->
+      <section class="tool-panel" id="json-prettify">
+        <header class="tool-header">
+          <h1 class="tool-title">JSON Prettify</h1>
+          <p class="tool-desc">Format and indent JSON for readability. Key order is preserved.</p>
+        </header>
+        <div class="io-grid">
+          <div class="io-box">
+            <div class="io-label">Input</div>
+            <textarea id="jp-input" class="io-textarea" placeholder='{"name":"Alice","age":30}' spellcheck="false"></textarea>
+            <div class="io-error" id="jp-error"></div>
+          </div>
+          <div class="io-box">
+            <div class="io-label-row">
+              <span class="io-label">Output</span>
+              <button class="btn-copy" data-copy="jp-output">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                Copy
+              </button>
+            </div>
+            <textarea id="jp-output" class="io-textarea" readonly spellcheck="false"></textarea>
+          </div>
+        </div>
+        <div class="tool-actions">
+          <button class="btn btn-primary" id="jp-submit">Prettify</button>
+          <button class="btn btn-ghost" id="jp-clear">Clear</button>
+          <span class="kbd-hint">⌘↵ to run</span>
+        </div>
+      </section>
+
+      <!-- ========== JSON: Compress ========== -->
+      <section class="tool-panel" id="json-compress">
+        <header class="tool-header">
+          <h1 class="tool-title">JSON Compress</h1>
+          <p class="tool-desc">Minify JSON by removing all unnecessary whitespace.</p>
+        </header>
+        <div class="io-grid">
+          <div class="io-box">
+            <div class="io-label">Input</div>
+            <textarea id="jc-input" class="io-textarea" placeholder='{
+  "name": "Alice",
+  "age": 30
+}' spellcheck="false"></textarea>
+            <div class="io-error" id="jc-error"></div>
+          </div>
+          <div class="io-box">
+            <div class="io-label-row">
+              <span class="io-label">Output</span>
+              <button class="btn-copy" data-copy="jc-output">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                Copy
+              </button>
+            </div>
+            <textarea id="jc-output" class="io-textarea" readonly spellcheck="false"></textarea>
+          </div>
+        </div>
+        <div class="tool-actions">
+          <button class="btn btn-primary" id="jc-submit">Compress</button>
+          <button class="btn btn-ghost" id="jc-clear">Clear</button>
+          <span class="kbd-hint">⌘↵ to run</span>
+        </div>
+      </section>
+
+      <!-- ========== JSON: Validate ========== -->
+      <section class="tool-panel" id="json-validate">
+        <header class="tool-header">
+          <h1 class="tool-title">JSON Validate</h1>
+          <p class="tool-desc">Check whether your JSON is syntactically valid.</p>
+        </header>
+        <div class="io-col">
+          <div class="io-box">
+            <div class="io-label">Input</div>
+            <textarea id="jv-input" class="io-textarea" placeholder='{"valid": true}' spellcheck="false"></textarea>
+          </div>
+          <div class="tool-actions">
+            <button class="btn btn-primary" id="jv-submit">Validate</button>
+            <button class="btn btn-ghost" id="jv-clear">Clear</button>
+            <span class="kbd-hint">⌘↵ to run</span>
+          </div>
+          <div class="validate-result" id="jv-result">
+            <span class="validate-icon" id="jv-icon"></span>
+            <div>
+              <div class="validate-title" id="jv-title"></div>
+              <div class="validate-msg" id="jv-msg"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== JSON: Compare ========== -->
+      <section class="tool-panel" id="json-compare">
+        <header class="tool-header">
+          <h1 class="tool-title">JSON Compare</h1>
+          <p class="tool-desc">Deep-compare two JSON documents and highlight every difference.</p>
+        </header>
+        <div class="io-grid" style="margin-bottom:12px">
+          <div class="io-box">
+            <div class="io-label">JSON A</div>
+            <textarea id="jcmp-a" class="io-textarea" placeholder='{"name":"Alice","age":30}' spellcheck="false"></textarea>
+            <div class="io-error" id="jcmp-error-a"></div>
+          </div>
+          <div class="io-box">
+            <div class="io-label">JSON B</div>
+            <textarea id="jcmp-b" class="io-textarea" placeholder='{"name":"Bob","age":30}' spellcheck="false"></textarea>
+            <div class="io-error" id="jcmp-error-b"></div>
+          </div>
+        </div>
+        <div class="tool-actions" style="margin-bottom:16px">
+          <button class="btn btn-primary" id="jcmp-submit">Compare</button>
+          <button class="btn btn-ghost" id="jcmp-clear">Clear</button>
+          <span class="kbd-hint">⌘↵ to run</span>
+        </div>
+        <div class="compare-result" id="jcmp-result"></div>
+      </section>
+
+      <!-- ========== JSON: Sort Keys ========== -->
+      <section class="tool-panel" id="json-sort-keys">
+        <header class="tool-header">
+          <h1 class="tool-title">JSON Sort Keys</h1>
+          <p class="tool-desc">Recursively sort all object keys alphabetically at every nesting level.</p>
+        </header>
+        <div class="io-grid">
+          <div class="io-box">
+            <div class="io-label">Input</div>
+            <textarea id="jsk-input" class="io-textarea" placeholder='{"z":3,"a":1,"m":2}' spellcheck="false"></textarea>
+            <div class="io-error" id="jsk-error"></div>
+          </div>
+          <div class="io-box">
+            <div class="io-label-row">
+              <span class="io-label">Output</span>
+              <button class="btn-copy" data-copy="jsk-output">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                Copy
+              </button>
+            </div>
+            <textarea id="jsk-output" class="io-textarea" readonly spellcheck="false"></textarea>
+          </div>
+        </div>
+        <div class="tool-actions">
+          <button class="btn btn-primary" id="jsk-submit">Sort Keys</button>
+          <button class="btn btn-ghost" id="jsk-clear">Clear</button>
+          <span class="kbd-hint">⌘↵ to run</span>
+        </div>
+      </section>
+
+      <!-- ========== URL: Parse ========== -->
+      <section class="tool-panel" id="url-parse">
+        <header class="tool-header">
+          <h1 class="tool-title">URL Parser</h1>
+          <p class="tool-desc">Decompose a URL into scheme, host, port, path, query parameters, fragment, and more.</p>
+        </header>
+        <div class="io-col">
+          <div class="io-box">
+            <div class="io-label">URL</div>
+            <input type="text" id="up-input" class="io-input mono"
+              placeholder="https://user:pass@example.com:8080/api/v1?foo=bar&baz=qux#section">
+          </div>
+          <div class="tool-actions">
+            <button class="btn btn-primary" id="up-submit">Parse</button>
+            <button class="btn btn-ghost" id="up-clear">Clear</button>
+            <div class="io-error" id="up-error" style="margin-left:0;margin-top:0"></div>
+          </div>
+          <div class="parse-result" id="up-result"></div>
+        </div>
+      </section>
+
+      <!-- ========== URL: Encode ========== -->
+      <section class="tool-panel" id="url-encode">
+        <header class="tool-header">
+          <h1 class="tool-title">URL Encode</h1>
+          <p class="tool-desc">Percent-encode a string so it's safe to use as a URL query parameter value.</p>
+        </header>
+        <div class="io-grid">
+          <div class="io-box">
+            <div class="io-label">Input</div>
+            <textarea id="ue-input" class="io-textarea" placeholder="hello world / foo=bar&baz=qux" spellcheck="false"></textarea>
+          </div>
+          <div class="io-box">
+            <div class="io-label-row">
+              <span class="io-label">Output</span>
+              <button class="btn-copy" data-copy="ue-output">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                Copy
+              </button>
+            </div>
+            <textarea id="ue-output" class="io-textarea" readonly spellcheck="false"></textarea>
+          </div>
+        </div>
+        <div class="tool-actions">
+          <button class="btn btn-primary" id="ue-submit">Encode</button>
+          <button class="btn btn-ghost" id="ue-clear">Clear</button>
+          <span class="kbd-hint">⌘↵ to run</span>
+        </div>
+      </section>
+
+      <!-- ========== URL: Decode ========== -->
+      <section class="tool-panel" id="url-decode">
+        <header class="tool-header">
+          <h1 class="tool-title">URL Decode</h1>
+          <p class="tool-desc">Decode a percent-encoded URL string back to plain text.</p>
+        </header>
+        <div class="io-grid">
+          <div class="io-box">
+            <div class="io-label">Input</div>
+            <textarea id="ud-input" class="io-textarea" placeholder="hello+world+%2F+foo%3Dbar%26baz%3Dqux" spellcheck="false"></textarea>
+            <div class="io-error" id="ud-error"></div>
+          </div>
+          <div class="io-box">
+            <div class="io-label-row">
+              <span class="io-label">Output</span>
+              <button class="btn-copy" data-copy="ud-output">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                Copy
+              </button>
+            </div>
+            <textarea id="ud-output" class="io-textarea" readonly spellcheck="false"></textarea>
+          </div>
+        </div>
+        <div class="tool-actions">
+          <button class="btn btn-primary" id="ud-submit">Decode</button>
+          <button class="btn btn-ghost" id="ud-clear">Clear</button>
+          <span class="kbd-hint">⌘↵ to run</span>
+        </div>
+      </section>
+
+      <!-- ========== Cipher: Caesar ========== -->
+      <section class="tool-panel" id="cipher-caesar">
+        <header class="tool-header">
+          <h1 class="tool-title">Caesar Cipher</h1>
+          <p class="tool-desc">
+            Vigenère-enhanced Caesar cipher. The <strong>Text Key</strong> cycles through your message
+            adding per-character shifts; the <strong>Shift</strong> adds a fixed base offset on top.
+            Leave the key empty to use pure Caesar.
+          </p>
+        </header>
+
+        <div class="cipher-config">
+          <div class="field-group">
+            <span class="field-label">Text Key</span>
+            <input type="text" id="cc-key" class="io-input cipher-key-input"
+              placeholder="SECRET" autocomplete="off" spellcheck="false">
+          </div>
+          <div class="field-group">
+            <span class="field-label">Shift</span>
+            <input type="number" id="cc-shift" class="io-input cipher-shift-input"
+              value="13" min="0" max="999">
+          </div>
+          <div class="field-group">
+            <span class="field-label">Mode</span>
+            <div class="toggle-group" id="cc-mode-group">
+              <button class="toggle-btn active" data-value="encode">Encode</button>
+              <button class="toggle-btn"        data-value="decode">Decode</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="io-grid">
+          <div class="io-box">
+            <div class="io-label">Input</div>
+            <textarea id="cc-input" class="io-textarea" placeholder="Hello, World!" spellcheck="false"></textarea>
+          </div>
+          <div class="io-box">
+            <div class="io-label-row">
+              <span class="io-label">Output</span>
+              <button class="btn-copy" data-copy="cc-output">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                Copy
+              </button>
+            </div>
+            <textarea id="cc-output" class="io-textarea" readonly spellcheck="false"></textarea>
+          </div>
+        </div>
+        <div class="tool-actions">
+          <button class="btn btn-primary" id="cc-submit">Apply Cipher</button>
+          <button class="btn btn-ghost" id="cc-clear">Clear</button>
+          <span class="kbd-hint">⌘↵ to run</span>
+        </div>
+      </section>
+
+    </main><!-- /main -->
+  </div><!-- /body -->
+</div><!-- /app -->
+
+<script src="app.js"></script>
+</body>
+</html>
