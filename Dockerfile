@@ -22,7 +22,7 @@ WORKDIR /app
 COPY --from=builder /app/server .
 COPY static/ static/
 
-ENV PORT=8080
-EXPOSE 8080
+ENV PORT=8922
+EXPOSE 8922
 
 ENTRYPOINT ["/app/server"]

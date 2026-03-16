@@ -70,21 +70,17 @@
           <h1 class="tool-title">JSON Prettify</h1>
           <p class="tool-desc">Format and indent JSON for readability. Key order is preserved.</p>
         </header>
-        <div class="io-grid">
-          <div class="io-box">
-            <div class="io-label">Input</div>
-            <textarea id="jp-input" class="io-textarea" placeholder='{"name":"Alice","age":30}' spellcheck="false"></textarea>
-            <div class="io-error" id="jp-error"></div>
-          </div>
+        <div class="io-col">
           <div class="io-box">
             <div class="io-label-row">
-              <span class="io-label">Output</span>
-              <button class="btn-copy" data-copy="jp-output">
+              <span class="io-label">JSON</span>
+              <button class="btn-copy" data-copy="jp-input">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
                 Copy
               </button>
             </div>
-            <textarea id="jp-output" class="io-textarea" readonly spellcheck="false"></textarea>
+            <textarea id="jp-input" class="io-textarea" placeholder='{"name":"Alice","age":30}' spellcheck="false"></textarea>
+            <div class="io-error" id="jp-error"></div>
           </div>
         </div>
         <div class="tool-actions">
@@ -159,7 +155,7 @@
           <h1 class="tool-title">JSON Compare</h1>
           <p class="tool-desc">Deep-compare two JSON documents and highlight every difference.</p>
         </header>
-        <div class="io-grid" style="margin-bottom:12px">
+        <div class="io-grid">
           <div class="io-box">
             <div class="io-label">JSON A</div>
             <textarea id="jcmp-a" class="io-textarea" placeholder='{"name":"Alice","age":30}' spellcheck="false"></textarea>
@@ -171,7 +167,7 @@
             <div class="io-error" id="jcmp-error-b"></div>
           </div>
         </div>
-        <div class="tool-actions" style="margin-bottom:16px">
+        <div class="tool-actions">
           <button class="btn btn-primary" id="jcmp-submit">Compare</button>
           <button class="btn btn-ghost" id="jcmp-clear">Clear</button>
           <span class="kbd-hint">⌘↵ to run</span>

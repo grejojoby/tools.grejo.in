@@ -121,19 +121,25 @@ window.addEventListener('popstate', () => {
    JSON: Prettify
    ============================================================ */
 (function () {
-  const input  = () => document.getElementById('jp-input');
-  const output = () => document.getElementById('jp-output');
-  const errEl  = () => document.getElementById('jp-error');
+  const input = () => document.getElementById('jp-input');
+  const errEl = () => document.getElementById('jp-error');
 
   document.getElementById('jp-submit').addEventListener('click', async () => {
     const res = await api('/api/json/format', { input: input().value, mode: 'pretty' });
-    setTextOutput(output(), errEl(), res);
+    if (res.error) {
+      input().classList.add('error');
+      errEl().textContent = res.error; errEl().classList.add('visible');
+    } else {
+      input().value = res.output ?? '';
+      input().classList.remove('error');
+      errEl().textContent = ''; errEl().classList.remove('visible');
+    }
   });
 
   document.getElementById('jp-clear').addEventListener('click', () => {
-    input().value = ''; output().value = '';
+    input().value = '';
+    input().classList.remove('error');
     errEl().textContent = ''; errEl().classList.remove('visible');
-    output().classList.remove('error');
   });
 })();
 

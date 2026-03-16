@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(go build:*)",
+      "Bash(go test:*)",
+      "Bash(docker build:*)",
+      "Bash(docker image inspect tools-grejo-in --format '{{.Size}}')"
+    ]
+  }
+}
