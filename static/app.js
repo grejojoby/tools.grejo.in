@@ -527,6 +527,36 @@ window.addEventListener('popstate', () => {
 })();
 
 /* ============================================================
+   UUID: Generate v4
+   ============================================================ */
+(function () {
+  const count  = () => document.getElementById('uv-count');
+  const output = () => document.getElementById('uv-output');
+  const errEl  = () => document.getElementById('uv-error');
+
+  document.getElementById('uv-submit').addEventListener('click', async () => {
+    const n = parseInt(count().value, 10) || 1;
+    const res = await api('/api/uuid/v4', { count: n });
+    if (res.error) {
+      output().value = '';
+      errEl().textContent = res.error;
+      errEl().classList.add('visible');
+    } else {
+      output().value = res.uuids.join('\n');
+      errEl().textContent = '';
+      errEl().classList.remove('visible');
+    }
+  });
+
+  document.getElementById('uv-clear').addEventListener('click', () => {
+    output().value = '';
+    count().value = '1';
+    errEl().textContent = '';
+    errEl().classList.remove('visible');
+  });
+})();
+
+/* ============================================================
    Bootstrap
    ============================================================ */
 (function init() {

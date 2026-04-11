@@ -25,6 +25,9 @@ func main() {
 	// Cipher
 	mux.HandleFunc("/api/cipher/caesar", handler.CORS(handler.CaesarCipher))
 
+	// UUID
+	mux.HandleFunc("/api/uuid/v4", handler.CORS(handler.UUIDv4Generate))
+
 	// Static files — must be last
 	mux.Handle("/", http.FileServer(http.Dir("static")))
 

@@ -59,6 +59,10 @@
         <div class="nav-group-label">Cipher</div>
         <a class="nav-item" href="#cipher-caesar">Caesar</a>
       </div>
+      <div class="nav-group">
+        <div class="nav-group-label">UUID</div>
+        <a class="nav-item" href="#uuid-v4">Generate v4</a>
+      </div>
     </nav>
 
     <!-- ---- Main ---- -->
@@ -335,6 +339,36 @@
         <div class="tool-actions">
           <button class="btn btn-primary" id="cc-submit">Apply Cipher</button>
           <button class="btn btn-ghost" id="cc-clear">Clear</button>
+          <span class="kbd-hint">⌘↵ to run</span>
+        </div>
+      </section>
+
+      <!-- ========== UUID: Generate v4 ========== -->
+      <section class="tool-panel" id="uuid-v4">
+        <header class="tool-header">
+          <h1 class="tool-title">UUID v4 Generator</h1>
+          <p class="tool-desc">Generate random UUID v4 identifiers using a cryptographically secure source.</p>
+        </header>
+        <div class="io-col">
+          <div class="io-box">
+            <div class="io-label">Count (1–100)</div>
+            <input id="uv-count" class="io-input" type="number" min="1" max="100" value="1" style="width:6rem">
+          </div>
+          <div class="io-box">
+            <div class="io-label-row">
+              <span class="io-label">UUIDs</span>
+              <button class="btn-copy" data-copy="uv-output">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                Copy
+              </button>
+            </div>
+            <textarea id="uv-output" class="io-textarea" readonly spellcheck="false"></textarea>
+            <div class="io-error" id="uv-error"></div>
+          </div>
+        </div>
+        <div class="tool-actions">
+          <button class="btn btn-primary" id="uv-submit">Generate</button>
+          <button class="btn btn-ghost" id="uv-clear">Clear</button>
           <span class="kbd-hint">⌘↵ to run</span>
         </div>
       </section>

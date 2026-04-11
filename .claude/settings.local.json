@@ -4,7 +4,10 @@
       "Bash(go build:*)",
       "Bash(go test:*)",
       "Bash(docker build:*)",
-      "Bash(docker image inspect tools-grejo-in --format '{{.Size}}')"
+      "Bash(docker image inspect tools-grejo-in --format '{{.Size}}')",
+      "mcp__plugin_context-mode_context-mode__execute_file",
+      "mcp__plugin_context-mode_context-mode__batch_execute",
+      "mcp__plugin_context-mode_context-mode__execute"
     ]
   }
 }
