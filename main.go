@@ -28,6 +28,11 @@ func main() {
 	// UUID
 	mux.HandleFunc("/api/uuid/v4", handler.CORS(handler.UUIDv4Generate))
 
+	// Build info
+	mux.HandleFunc("/api/build", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "build.json")
+	})
+
 	// Static files — must be last
 	mux.Handle("/", http.FileServer(http.Dir("static")))
 

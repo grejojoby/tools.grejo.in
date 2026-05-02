@@ -3,11 +3,15 @@
 # ────────────────────────────────────────────
 FROM golang:1.25-alpine AS builder
 
+ARG BUILD_NUMBER=0
+
 WORKDIR /app
 
 COPY go.mod ./
 COPY main.go ./
 COPY handler/ handler/
+
+RUN echo "{\"build\":$BUILD_NUMBER}" > build.json
 
 RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -o server .
 
@@ -20,6 +24,7 @@ FROM scratch
 WORKDIR /app
 
 COPY --from=builder /app/server .
+COPY --from=builder /app/build.json .
 COPY static/ static/
 
 ENV PORT=8922

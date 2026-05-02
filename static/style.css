@@ -145,6 +145,12 @@ body {
   gap: 8px;
 }
 
+.build-number {
+  font-size: 12px;
+  color: var(--c-text-tertiary);
+  font-family: var(--font-mono);
+}
+
 .logo {
   display: flex;
   align-items: center;

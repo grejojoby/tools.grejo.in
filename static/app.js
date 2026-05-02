@@ -40,6 +40,12 @@ function setTextOutput(outputEl, errorEl, res) {
   }
 }
 
+/* ---- Build number ---- */
+fetch('/api/build').then(r => r.json()).then(d => {
+  const el = document.getElementById('build-number');
+  if (el && d.build) el.textContent = '#' + d.build;
+}).catch(() => {});
+
 /* ---- Copy to clipboard ---- */
 document.addEventListener('click', (e) => {
   const btn = e.target.closest('.btn-copy');
