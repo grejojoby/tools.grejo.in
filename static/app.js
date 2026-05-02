@@ -131,8 +131,10 @@ window.addEventListener('popstate', () => {
       errEl().textContent = res.error; errEl().classList.add('visible');
     } else {
       input().value = res.output ?? '';
-      input().style.height = 'auto';
-      input().style.height = input().scrollHeight + 'px';
+      const lines = res.output.split('\n').length;
+      const lineHeight = 20;
+      const padding = 26;
+      input().style.height = (lines * lineHeight + padding) + 'px';
       input().classList.remove('error');
       errEl().textContent = ''; errEl().classList.remove('visible');
     }
